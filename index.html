@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Продуктовый ML GigaChat — ищем ML-инженеров</title>
+<meta name="description" content="Обучаем GigaChat для Сбербанк Онлайн и Giga.Chat: от SFT до online-RL и собственный harness. Доклад с ГигаКонф, задачи и открытые роли.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Продуктовый ML GigaChat">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Продуктовый ML GigaChat — ищем ML-инженеров">
+<meta property="og:description" content="Обучаем GigaChat для Сбербанк Онлайн и Giga.Chat: от SFT до online-RL и собственный harness. Доклад с ГигаКонф, задачи и открытые роли.">
+<meta property="og:url" content="https://savushkinnm.github.io/gigachat-team/">
+<meta property="og:image" content="https://savushkinnm.github.io/gigachat-team/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Команда продуктового ML GigaChat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Продуктовый ML GigaChat — ищем ML-инженеров">
+<meta name="twitter:description" content="Обучаем GigaChat для Сбербанк Онлайн и Giga.Chat: от SFT до online-RL и собственный harness.">
+<meta name="twitter:image" content="https://savushkinnm.github.io/gigachat-team/assets/og-cover.jpg">
+<link rel="canonical" href="https://savushkinnm.github.io/gigachat-team/">
+<link rel="icon" href="data:,">
+<meta name="theme-color" content="#141414">
+<style>
+  :root {
+    --bg: #141414;
+    --card: #1c1c21;
+    --line: rgba(255, 255, 255, .08);
+    --text: #f3f3f6;
+    --soft: #d4d4dc;
+    --muted: #a3a3ae;
+    --blue: #1a10d6;
+    --violet: #7b62e8;
+    --purple: #631b90;
+    --teal: #8ee2d2;
+    --peach: #f8b96f;
+    --pink: #dc7b9e;
+    --radius: 22px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 72px 0; }
+  h1, h2, h3 { margin: 0; line-height: 1.12; letter-spacing: -0.01em; }
+  h2 { font-size: clamp(28px, 4.2vw, 44px); margin-bottom: 14px; }
+  .lead { color: var(--muted); font-size: clamp(17px, 2vw, 20px); max-width: 760px; margin: 0 0 32px; }
+  .eyebrow { color: var(--teal); font-weight: 600; font-size: 15px; letter-spacing: .02em; margin-bottom: 18px; }
+
+  .hero { position: relative; overflow: hidden; padding: 56px 0 80px; }
+  .hero::before {
+    content: ""; position: absolute; left: -380px; bottom: -460px; width: 920px; height: 920px; border-radius: 50%;
+    background: radial-gradient(closest-side, transparent 56%, rgba(248, 185, 111, .38) 63%, rgba(220, 123, 158, .34) 69%,
+      rgba(123, 98, 232, .45) 76%, rgba(26, 16, 214, .6) 85%, transparent 96%);
+    filter: blur(26px); pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, #000 18%, transparent 48%);
+    mask-image: linear-gradient(to bottom, #000 18%, transparent 48%);
+  }
+  .hero-grid { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 44px; align-items: center; }
+  .hero h1 { font-size: clamp(36px, 5.6vw, 62px); font-weight: 750; }
+  .hero p { color: var(--soft); font-size: clamp(18px, 2.2vw, 21px); margin: 22px 0 30px; max-width: 600px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 999px;
+    font-weight: 600; font-size: 16px; text-decoration: none; transition: transform .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: linear-gradient(90deg, var(--blue), var(--violet)); color: #fff; }
+  .btn-ghost { border: 1px solid rgba(255, 255, 255, .24); }
+  .team { margin: 0; }
+  .team img { width: 100%; border-radius: var(--radius); box-shadow: 0 30px 80px rgba(26, 16, 214, .35); }
+  .team figcaption { color: var(--muted); font-size: 14px; margin-top: 12px; }
+
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
+  .stat b {
+    display: block; font-size: clamp(26px, 3vw, 34px); line-height: 1.1; white-space: nowrap;
+    background: linear-gradient(90deg, #fff, #b9a9ff); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .stat span { display: block; color: var(--muted); font-size: 14px; line-height: 1.4; margin-top: 8px; }
+  .note { color: var(--muted); font-size: 14px; margin: 16px 0 0; }
+
+  .talk-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 32px; align-items: start; }
+  .player {
+    position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: #000;
+    box-shadow: 0 30px 80px rgba(99, 27, 144, .35);
+  }
+  .player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .player-link { display: inline-block; margin-top: 14px; color: var(--teal); font-weight: 600; text-decoration: none; }
+  .speaker { display: flex; gap: 14px; align-items: center; margin-bottom: 22px; }
+  .speaker img { width: 64px; height: 64px; border-radius: 50%; }
+  .speaker b { display: block; }
+  .speaker span { color: var(--muted); font-size: 15px; }
+  .ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .ticks li { position: relative; padding-left: 26px; color: var(--soft); }
+  .ticks li::before {
+    content: ""; position: absolute; left: 0; top: .55em; width: 10px; height: 10px; border-radius: 50%; background: var(--teal);
+  }
+
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+  .card h3 { font-size: 22px; margin-bottom: 10px; }
+  .card p { margin: 0; color: var(--soft); }
+  .card.accent { background: linear-gradient(160deg, rgba(26, 16, 214, .38), rgba(99, 27, 144, .26) 55%, var(--card)); }
+  .tag { display: inline-block; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 999px; margin-bottom: 16px; }
+  .tag-violet { background: rgba(123, 98, 232, .18); color: #c3b6ff; }
+  .tag-teal { background: rgba(142, 226, 210, .14); color: var(--teal); }
+  .tag-warm { background: rgba(248, 185, 111, .14); color: var(--peach); }
+
+  .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .gallery figure { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+  .gallery a { display: block; cursor: zoom-in; }
+  .gallery img { width: 100%; }
+  .gallery figcaption { padding: 14px 18px 16px; color: var(--soft); font-size: 15px; }
+
+  .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .role { display: flex; flex-direction: column; }
+  .role p { flex: 1; margin-bottom: 24px; }
+  .role .tag, .role .btn, .role .hint { align-self: flex-start; }
+  .role .hint { color: var(--teal); font-weight: 600; }
+
+  .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .why .card h3 { font-size: 19px; }
+
+  .cta {
+    position: relative; overflow: hidden; text-align: center; border-radius: 28px; padding: 64px 24px;
+    background: radial-gradient(120% 140% at 50% 120%, rgba(26, 16, 214, .55), rgba(99, 27, 144, .35) 45%, var(--card) 75%);
+    border: 1px solid var(--line);
+  }
+  .cta p { color: var(--soft); font-size: clamp(17px, 2vw, 20px); max-width: 640px; margin: 14px auto 28px; }
+  .cta .btns { justify-content: center; }
+  footer { color: var(--muted); font-size: 14px; text-align: center; padding: 8px 0 48px; }
+
+  .lightbox {
+    position: fixed; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center;
+    padding: 16px; background: rgba(0, 0, 0, .92); cursor: zoom-out;
+  }
+  .lightbox[hidden] { display: none; }
+  .lightbox img { max-height: 100%; border-radius: 12px; }
+
+  @media (max-width: 900px) {
+    section { padding: 52px 0; }
+    .hero { padding: 36px 0 56px; }
+    .hero-grid, .talk-grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stats .stat:last-child { grid-column: span 2; }
+    .cards, .gallery, .roles, .why { grid-template-columns: 1fr; }
+    .card { padding: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Продуктовый ML GigaChat · Сбер</div>
+      <h1>Обучаем GigaChat для Сбербанк Онлайн и Giga.Chat</h1>
+      <p>Наша команда отвечает за весь продуктовый ML в Сбере на базе GigaChat. Сами ведём alignment модели — от SFT до online-RL — и пишем собственный harness для универсальных помощников.</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#talk">Смотреть доклад</a>
+        <a class="btn btn-ghost" href="#roles">Открытые роли</a>
+      </div>
+    </div>
+    <figure class="team">
+      <img src="assets/team.jpg" width="640" height="640" alt="Команда продуктового ML GigaChat" fetchpriority="high">
+      <figcaption>Это мы</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>80+ млн</b><span>MAU у Сбербанк Онлайн</span></div>
+      <div class="stat"><b>20+ млн</b><span>уникальных пользователей Giga.Chat</span></div>
+      <div class="stat"><b>×1,5</b><span>рост GCR от собственного harness на той же модели</span></div>
+      <div class="stat"><b>95%</b><span>GCR у дообученной GigaChat BAIS без reasoning</span></div>
+      <div class="stat"><b>33% → 77%</b><span>GCR на стресс-тесте сложных сценариев</span></div>
+    </div>
+    <p class="note">GCR — доля диалогов, где цель клиента достигнута: не «модель вызвала функцию», а «вклад открыт». Цифры — из доклада на ГигаКонф 2026.</p>
+  </div>
+</section>
+
+<section id="talk">
+  <div class="wrap">
+    <h2>Доклад с ГигаКонф 2026</h2>
+    <p class="lead">«Один голос, много навыков» — как мы перестраиваем ИИ-помощника Сбербанк Онлайн и почему пишем для него собственный harness.</p>
+    <div class="talk-grid">
+      <div>
+        <div class="player">
+          <iframe src="https://172531.edgevideo.ru/videos/172531_KHV0DEaTg3oC89ex" title="Доклад «Один голос, много навыков»" loading="lazy" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <a class="player-link" href="https://172531.edgevideo.ru/videos/172531_KHV0DEaTg3oC89ex" target="_blank" rel="noopener">Открыть запись отдельно ↗</a>
+      </div>
+      <div>
+        <div class="speaker">
+          <img src="assets/speaker.jpg" width="640" height="640" alt="Никита Савушкин" loading="lazy" decoding="async">
+          <div><b>Никита Савушкин</b><span>Team Lead прикладного ИИ ГигаЧат</span></div>
+        </div>
+        <ul class="ticks">
+          <li>Почему готовые harness не подошли банку и зачем мы пишем свой на Go.</li>
+          <li>Как координатор ведёт разговор, а навыки работают в своих сессиях.</li>
+          <li>Как архитектура подняла GCR в полтора раза, а дообученная модель — до 95%.</li>
+          <li>Как платформа превращает граф сценария в обученную и проверенную модель.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <h2>Чем занимается команда</h2>
+    <p class="lead">Мы владеем всем циклом: от архитектуры помощника до обучения модели и порогов релиза. Главное для нас — обучение и online-RL.</p>
+    <div class="cards">
+      <div class="card accent">
+        <span class="tag tag-violet">Обучение</span>
+        <h3>Обучаем модель</h3>
+        <p>Ведём весь каскад: SFT, online-RL (GRPO), on-policy distillation. Учим reward-модели и следим, чтобы модель не взламывала награду. Работаем с GigaChat и open source — Qwen, DeepSeek, Kimi, GLM.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag-teal">online-RL</span>
+        <h3>Создаём среды для online-RL</h3>
+        <p>Окружения с инструментами, состоянием и проверяемой наградой, в которых модель учится на собственных действиях. Одна и та же среда работает и на обучение, и на эвал.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag-warm">Harness</span>
+        <h3>Пишем свой harness</h3>
+        <p>GigaHarness на Go: координатор ведёт диалог, навыки работают в своих сессиях, есть память клиента, асинхронность и хуки. В боевом СБОЛ с августа 2026 — пока для сотрудников банка.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag-violet">Платформа</span>
+        <h3>Строим платформу данных, трейна и эвала</h3>
+        <p>Конвейер от графа сценария до проверенной модели: трейн из логов прогонов, разметка людьми и LLM-джаджами, LoRA под навык, e2e-эвалы и независимые пороги релиза.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="slides">
+  <div class="wrap">
+    <h2>Слайды из доклада</h2>
+    <p class="lead">Нажми на слайд, чтобы рассмотреть подробнее.</p>
+    <div class="gallery">
+      <figure>
+        <a aria-label="Увеличить слайд" href="assets/slide-assistant.jpg"><img src="assets/slide-assistant.jpg" width="1400" height="787" loading="lazy" decoding="async" alt="Помощник СБОЛ: спросить и сразу сделать"></a>
+        <figcaption>Помощник СБОЛ: спросить и сразу сделать</figcaption>
+      </figure>
+      <figure>
+        <a aria-label="Увеличить слайд" href="assets/slide-harness.jpg"><img src="assets/slide-harness.jpg" width="1400" height="787" loading="lazy" decoding="async" alt="Архитектура GigaHarness"></a>
+        <figcaption>GigaHarness: с клиентом говорит координатор, изменения — в сессиях навыков</figcaption>
+      </figure>
+      <figure>
+        <a aria-label="Увеличить слайд" href="assets/slide-roadmap.jpg"><img src="assets/slide-roadmap.jpg" width="1400" height="787" loading="lazy" decoding="async" alt="Из чего состоит помощник и путь до прода"></a>
+        <figcaption>Из чего состоит помощник и где мы на пути до прода</figcaption>
+      </figure>
+      <figure>
+        <a aria-label="Увеличить слайд" href="assets/slide-gcr.jpg"><img src="assets/slide-gcr.jpg" width="1400" height="787" loading="lazy" decoding="async" alt="Harness поднял GCR в полтора раза"></a>
+        <figcaption>Harness поднял GCR в полтора раза — модель та же</figcaption>
+      </figure>
+      <figure>
+        <a aria-label="Увеличить слайд" href="assets/slide-bais.jpg"><img src="assets/slide-bais.jpg" width="1400" height="787" loading="lazy" decoding="async" alt="Дообученная BAIS даёт 95%"></a>
+        <figcaption>Дообученная BAIS без reasoning обходит открытые модели с reasoning</figcaption>
+      </figure>
+      <figure>
+        <a aria-label="Увеличить слайд" href="assets/slide-stress.jpg"><img src="assets/slide-stress.jpg" width="1400" height="787" loading="lazy" decoding="async" alt="Стресс-тест: 33% → 77%"></a>
+        <figcaption>Стресс-тест на сложных сценариях: 33% → 77%</figcaption>
+      </figure>
+      <figure>
+        <a aria-label="Увеличить слайд" href="assets/slide-platform.jpg"><img src="assets/slide-platform.jpg" width="1400" height="787" loading="lazy" decoding="async" alt="Платформа: от графа до проверенной модели"></a>
+        <figcaption>Платформа: команда приносит граф и тесты, остальное делает конвейер</figcaption>
+      </figure>
+      <figure>
+        <a aria-label="Увеличить слайд" href="assets/slide-lessons.jpg"><img src="assets/slide-lessons.jpg" width="1400" height="787" loading="lazy" decoding="async" alt="Что мы поняли"></a>
+        <figcaption>Что мы поняли</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="roles">
+  <div class="wrap">
+    <h2>Кого мы ищем</h2>
+    <p class="lead">Во всех трёх ролях есть online-RL — от обучения модели до сред и инфраструктуры.</p>
+    <div class="roles">
+      <div class="card role">
+        <span class="tag tag-warm">Feature Engineering</span>
+        <h3>ML-инженер ИИ-помощника GigaChat Prod</h3>
+        <p>Договорились с продуктом о фиче — и дальше сами делаем её end-to-end: дописываем harness, собираем данные и среды для обучения, делаем LLM-джаджи и разметку, обучаем вплоть до online-RL, эвалим и отдаём в прод.</p>
+        <a class="btn btn-primary" href="https://hh.ru/vacancy/138463744" target="_blank" rel="noopener">Вакансия на hh.ru ↗</a>
+      </div>
+      <div class="card role">
+        <span class="tag tag-teal">Платформа</span>
+        <h3>ML-инженер платформы данных, трейна и эвала</h3>
+        <p>Создаём среды для online-RL и превращаем их в сервис: раннеры, реестр, верификаторы. Строим инфраструктуру роллаутов, пайплайн «навык → трейн → LoRA → метрики», платформу данных и независимые пороги релиза.</p>
+        <a class="btn btn-primary" href="https://hh.ru/vacancy/138467606" target="_blank" rel="noopener">Вакансия на hh.ru ↗</a>
+      </div>
+      <div class="card role">
+        <span class="tag tag-violet">Обучение</span>
+        <h3>ML-инженер обучения и alignment</h3>
+        <p>Пишем код обучения и доводим запуск на сотнях карт до чекпоинта для прода: SFT, online-RL (GRPO), on-policy distillation, reward-модели, доработка verl на уровне кода.</p>
+        <span class="hint">Напиши рекрутеру, который прислал ссылку</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <h2>Почему к нам</h2>
+    <div class="why">
+      <div class="card"><h3>Короткий путь до пользователей</h3><p>Модель, которую ты обучишь, работает в продуктах с десятками миллионов пользователей.</p></div>
+      <div class="card"><h3>Большой пул карт</h3><p>Гипотезы проверяются на кластере, а не ждут очереди.</p></div>
+      <div class="card"><h3>Передний край</h3><p>Online-RL, on-policy distillation, среды для агентов и собственный harness.</p></div>
+      <div class="card"><h3>Инженерный трек</h3><p>Рост Senior → Staff → Principal без ухода в менеджмент.</p></div>
+      <div class="card"><h3>Сильное комьюнити</h3><p>Более 600 DS в банке, внутренние митапы и разборы конференций.</p></div>
+      <div class="card"><h3>Гибрид и офис</h3><p>Москва, Кутузовский проспект, 32. Оклад, годовой бонус и расширенный ДМС.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta">
+      <h2>Интересно?</h2>
+      <p>Ответь рекрутеру, который прислал эту ссылку, — договоримся о звонке на 30 минут и расскажем о задачах подробнее.</p>
+      <div class="btns"><a class="btn btn-ghost" href="#roles">К ролям</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>Продуктовый ML GigaChat · Сбер · 2026</footer>
+
+<div class="lightbox" hidden></div>
+<script>
+  const box = document.querySelector(".lightbox");
+  const close = () => { box.hidden = true; box.replaceChildren(); };
+  document.querySelectorAll(".gallery a").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const img = document.createElement("img");
+      img.src = link.getAttribute("href");
+      img.alt = link.querySelector("img").alt;
+      box.replaceChildren(img);
+      box.hidden = false;
+    });
+  });
+  box.addEventListener("click", close);
+  document.addEventListener("keydown", (event) => { if (event.key === "Escape") close(); });
+</script>
+</body>
+</html>
