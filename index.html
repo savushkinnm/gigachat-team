@@ -107,7 +107,9 @@
   .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
   .card h3 { font-size: 22px; margin-bottom: 10px; }
   .card p { margin: 0; color: var(--soft); }
-  .card.accent { background: linear-gradient(160deg, rgba(26, 16, 214, .38), rgba(99, 27, 144, .26) 55%, var(--card)); }
+  .card.tint-violet { background: linear-gradient(160deg, rgba(123, 98, 232, .32), rgba(26, 16, 214, .14) 55%, var(--card)); }
+  .card.tint-teal { background: linear-gradient(160deg, rgba(142, 226, 210, .20), rgba(26, 16, 214, .10) 55%, var(--card)); }
+  .card.tint-warm { background: linear-gradient(160deg, rgba(248, 185, 111, .22), rgba(220, 123, 158, .12) 55%, var(--card)); }
   .tag { display: inline-block; font-size: 13px; font-weight: 600; padding: 5px 12px; border-radius: 999px; margin-bottom: 16px; }
   .tag-violet { background: rgba(123, 98, 232, .18); color: #c3b6ff; }
   .tag-teal { background: rgba(142, 226, 210, .14); color: var(--teal); }
@@ -221,22 +223,22 @@
     <h2>Чем занимается команда</h2>
     <p class="lead">Мы владеем всем циклом: от архитектуры помощника до обучения модели и порогов релиза. Главное для нас — обучение и online-RL.</p>
     <div class="cards">
-      <div class="card accent">
+      <div class="card tint-violet">
         <span class="tag tag-violet">Обучение</span>
         <h3>Обучаем модель</h3>
         <p>Ведём весь каскад: SFT, online-RL (GRPO), on-policy distillation. Учим reward-модели и следим, чтобы модель не взламывала награду. Работаем с GigaChat и open source — Qwen, DeepSeek, Kimi, GLM.</p>
       </div>
-      <div class="card">
+      <div class="card tint-teal">
         <span class="tag tag-teal">online-RL</span>
         <h3>Создаём среды для online-RL</h3>
         <p>Окружения с инструментами, состоянием и проверяемой наградой, в которых модель учится на собственных действиях. Одна и та же среда работает и на обучение, и на эвал.</p>
       </div>
-      <div class="card">
+      <div class="card tint-warm">
         <span class="tag tag-warm">Harness</span>
         <h3>Пишем свой harness</h3>
         <p>GigaHarness на Go: координатор ведёт диалог, навыки работают в своих сессиях, есть память клиента, асинхронность и хуки. В боевом СБОЛ с августа 2026 — пока для сотрудников банка.</p>
       </div>
-      <div class="card">
+      <div class="card tint-violet">
         <span class="tag tag-violet">Платформа</span>
         <h3>Строим платформу данных, трейна и эвала</h3>
         <p>Конвейер от графа сценария до проверенной модели: трейн из логов прогонов, разметка людьми и LLM-джаджами, LoRA под навык, e2e-эвалы и независимые пороги релиза.</p>
@@ -322,7 +324,7 @@
       <div class="card"><h3>Последние технологии</h3><p>Online-RL, on-policy distillation, среды для агентов и собственный harness.</p></div>
       <div class="card"><h3>Инженерный трек</h3><p>Рост Senior → Staff → Principal без ухода в менеджмент.</p></div>
       <div class="card"><h3>Сильное комьюнити</h3><p>Более 600 DS в банке, внутренние митапы и разборы конференций.</p></div>
-      <div class="card"><h3>Гибрид и офис</h3><p>Москва, Кутузовский проспект, 32. Оклад, годовой бонус и расширенный ДМС.</p></div>
+      <div class="card"><h3>Условия</h3><p>Гибридный формат (м. Кутузовская), расширенный ДМС и годовой бонус.</p></div>
     </div>
   </div>
 </section>
